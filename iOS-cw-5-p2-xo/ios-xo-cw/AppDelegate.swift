@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  ios-classswork5-p1
+//  ios-xo-cw
 //
 //  Created by hoor alhusinan on 6/27/20.
 //  Copyright © 2020 7ooriCodes. All rights reserved.
