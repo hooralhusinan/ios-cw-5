@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import AVFoundation
 class ViewController: UIViewController {
     @IBOutlet weak var b1: UIButton!
     @IBOutlet weak var b2: UIButton!
@@ -22,6 +22,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var turnLabel: UILabel!
     var turn = 0
     override func viewDidLoad() {
+        playSound()
         super.viewDidLoad()}
     // Do any additional setup after loading the view.
     
@@ -31,10 +32,12 @@ class ViewController: UIViewController {
         
         if turn % 2 == 0 {
             sender.setTitle("X", for : .normal)
-            turnLabel.text = "O"
+            turnLabel.text = "♡"
+            sender.setTitleColor(.yellow, for: .normal)
         } else {
-            sender.setTitle("O", for : .normal)
+            sender.setTitle("♡", for : .normal)
             turnLabel.text = "X"
+            sender.setTitleColor(.blue , for: .normal)
         }
         print(turn)
         sender.isUserInteractionEnabled = false
@@ -45,8 +48,8 @@ class ViewController: UIViewController {
         if  checkWinner(p: "X") {
             okAlert(title: "Yayyyy, X wins 😍", message: "Congrats! now reset the game !")
         }
-        if  checkWinner(p: "O") {
-            okAlert(title: "Yayyyy, O wins 😍", message: "Congrats! now reset the game !")
+        if  checkWinner(p: "♡") {
+            okAlert(title: "Yayyyy, ♡ wins 😍", message: "Congrats! now reset the game !")
         }
         
     }
@@ -129,9 +132,20 @@ class ViewController: UIViewController {
         alertController.addAction(okAction)
         present(alertController, animated: true)
     }
+
+
+
+var bombSoundEffect: AVAudioPlayer?
+func playSound() {
+    let path = Bundle.main.path(forResource: "xo.mp3", ofType:nil)!
+    let url = URL(fileURLWithPath: path)
+
+    do {
+        bombSoundEffect = try AVAudioPlayer(contentsOf: url)
+        bombSoundEffect?.play()
+    } catch {
+        
+
+    }
 }
-
-
-
-
-
+}
